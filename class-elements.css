@@ -1,0 +1,86 @@
+.material-glass {
+    background: rgba(226, 236, 255, 0.487);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid var(--boder-color);
+    box-shadow: 0 4px 6px var(shadow-color);
+}
+
+/* Buttons */
+.material-button-main {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    color: var(--secondary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+}
+
+.material-button-icon-main {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    color: var(--secondary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+}
+
+.material-button-icon-main svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    fill: var(--secondary-color);
+}
+
+.material-button-main:hover, .material-button-icon-main:hover {
+    background-color: var(--primary-color-hover);
+    cursor: pointer;
+}
+
+.material-button-main:active, .material-button-icon-main:active {
+    background-color: var(--primary-color-active);
+}
+
+.material-button-icon-transparent {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    color: var(--primary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+}
+
+.material-button-icon-transparent svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    fill: var(--primary-color);
+}
+
+.material-button-icon-transparent:hover {
+    background-color: var(--no-background-color-hover);
+    cursor: pointer;
+}
+
+.material-button-icon-transparent:active {
+    background-color: var(--no-background-color-active);
+}
+
+.material-button-main:disabled, .material-button-icon-main:disabled, .material-button-icon-transparent:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+}
+/* Fim */
+
+/* Titles option */
+.material-title-option {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 5px;
+}
