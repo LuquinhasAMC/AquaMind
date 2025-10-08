@@ -1,5 +1,6 @@
+// Elementos do DOM
 const createPromptContainer = document.getElementById("create-prompt-container");
-const butto0nOpenCreatePrompt = document.getElementById("button-open-create-prompt");
+const buttonOpenCreatePrompt = document.getElementById("button-open-create-prompt");
 
 // selects
 const typeResponse = document.getElementById("typeResponse");
@@ -40,13 +41,13 @@ function toggleCreaetePrompt() {
         setTimeout(() => {
             createPromptContainer.style.display = "none";
         }, 500);
-        butto0nOpenCreatePrompt.textContent = "Criar um novo prompt";
+        buttonOpenCreatePrompt.textContent = "Criar um novo prompt";
     } else { 
         createPromptContainer.style.display = "flex";
         setTimeout(() => {
             createPromptContainer.style.maxHeight = "500px";
         }, 170);
-        butto0nOpenCreatePrompt.textContent = "Fechar";
+        buttonOpenCreatePrompt.textContent = "Fechar";
     }
 }
 
@@ -129,40 +130,54 @@ async function genereteResponse() {
     if (getComputedStyle(createPromptContainer).display === "flex") {
         toggleCreaetePrompt();
     }
+    
     loadingResponseShow();
 
     try {
+        // Adicionar timestamp único para evitar cache
+        const timestamp = Date.now();
+        const uniquePrompt = `${questionValue} ${topicValue} ${timestamp}`;
+
         const response = await fetch('https://text.pollinations.ai/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache'
             },
             body: JSON.stringify({
                 messages: [
-                    { role: 'system', content: `Você é uma IA especialista em ambiente aquático e deve ajudar os usuários com questões relacionadas aos ecosistemas, aos esportes, a sustentabilidade e a tecnologia dentro do ambiente aquático. ${responseAIValue}. Não pergunte ou solicite algo ao usuário, você deve responder apenas o assunto mas sem ter a intensão de continuar uma conversa sugerindo algo ao usuário.` },
-                    { role: 'user', content: `${questionValue} ${topicValue}`},
+                    { 
+                        role: 'system', 
+                        content: `Você é uma IA especialista em ambiente aquático. Responda em português brasileiro. ${responseAIValue}` 
+                    },
+                    { 
+                        role: 'user', 
+                        content: uniquePrompt // Usar prompt único
+                    }
                 ],
-
                 model: "openai",
                 private: true
             })
-        })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status}`);
+        }
 
         const dataResponse = await response.text();
-
-        const markdownText = dataResponse;
-        const htmlContent = marked.parse(markdownText);
-
+        const htmlContent = marked.parse(dataResponse);
         viewContentResponse.innerHTML = htmlContent;
 
         showAlert("Resposta gerada com sucesso!");
         loadingResponseHide();
+        
     } catch (error) {
-        showAlert("Erro ao gerar a resposta: " + error);
+        console.error("Erro:", error);
+        showAlert("Erro ao gerar a resposta: " + error.message);
         viewContentResponse.innerHTML = "";
         loadingResponseHide();
     }
-
 }
 
 function discartPrompt() {
