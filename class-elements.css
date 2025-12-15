@@ -18,6 +18,16 @@
     transition: all 0.1s ease;
 }
 
+.material-button-main-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 10px;
+    color: var(--primary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+}
+
 .material-button-icon-main {
     background-color: var(--primary-color);
     border: none;
@@ -61,12 +71,12 @@
     fill: var(--primary-color);
 }
 
-.material-button-icon-transparent:hover {
+.material-button-icon-transparent:hover, .material-button-main-outline:hover {
     background-color: var(--no-background-color-hover);
     cursor: pointer;
 }
 
-.material-button-icon-transparent:active {
+.material-button-icon-transparent:active, .material-button-main-outline:active {
     background-color: var(--no-background-color-active);
 }
 

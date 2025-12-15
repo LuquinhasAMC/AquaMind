@@ -149,7 +149,7 @@ async function genereteResponse() {
                 messages: [
                     { 
                         role: 'system', 
-                        content: `Você é uma IA especialista em ambiente aquático. Responda em português brasileiro. ${responseAIValue}` 
+                        content: `Você é uma IA especialista em ambiente aquático. Responda em português brasileiro. ${responseAIValue}. OBS: Ignore os números no final da mensagem, e suas respostas devem ser únicas, ou sehja, não responda come se você esperasse uma resposta do usuário ou sugestão do mesmo.` 
                     },
                     { 
                         role: 'user', 
