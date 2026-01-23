@@ -20,6 +20,10 @@ const alertMenssage = document.getElementById("alert-menssage");
 // Bottom buttons
 const bottmButtons = document.querySelectorAll(".bottom-buttons");
 
+// API key
+const apiKey = "pk_Y5I6mOOebQCCoqHH";
+
+// Show alert
 function showAlert(message) {
     alertMenssage.textContent = message;
     alertContainer.style.display = "block";
@@ -35,6 +39,7 @@ function showAlert(message) {
     }, 3000);
 }
 
+// Toggle create prompt
 function toggleCreaetePrompt() {
     if (createPromptContainer.style.display === "flex") {
         createPromptContainer.style.maxHeight = "0";
@@ -51,6 +56,7 @@ function toggleCreaetePrompt() {
     }
 }
 
+// Clear response
 function clearResponse() {
     if (getComputedStyle(noResponseAIViewContainer).display === "flex") {
         showAlert("Não há resposta para limpar.");
@@ -62,6 +68,7 @@ function clearResponse() {
     loadingResponseContainer.style.display = "none";
 }
 
+// Copy response
 function copyResponse() {
     if (getComputedStyle(noResponseAIViewContainer).display === "flex") {
         showAlert("Não há resposta para copiar.");
@@ -75,6 +82,7 @@ function copyResponse() {
     });
 }
 
+// Audio response
 function audioResponse() {
     if (getComputedStyle(noResponseAIViewContainer).display === "flex") {
         showAlert("Não há resposta para ouvir.");
@@ -87,6 +95,7 @@ function audioResponse() {
     showAlert("Lendo a resposta em voz alta...");
 }
 
+// Loading response show
 function loadingResponseShow() {
     loadingResponseContainer.style.display = "flex";
     viewAITextResponseContainer.style.display = "none";
@@ -97,6 +106,7 @@ function loadingResponseShow() {
     });
 }
 
+// Loading response hide
 function loadingResponseHide() {
     if (viewContentResponse.innerHTML.trim() === "") {
         noResponseAIViewContainer.style.display = "flex";
@@ -117,6 +127,7 @@ function loadingResponseHide() {
     }
 }
 
+// Generete response
 async function genereteResponse() {
     const questionValue = typeResponse.value;
     const topicValue = typeTopic.value;
@@ -137,29 +148,9 @@ async function genereteResponse() {
         // Adicionar timestamp único para evitar cache
         const timestamp = Date.now();
         const uniquePrompt = `${questionValue} ${topicValue} ${timestamp}`;
+        const systemRole = 'Você é uma IA especialista em ambiente aquático. Responda em português brasileiro. ${responseAIValue}. OBS: Ignore os números no final da mensagem, e suas respostas devem ser únicas, ou sehja, não responda come se você esperasse uma resposta do usuário ou sugestão do mesmo.'
 
-        const response = await fetch('https://text.pollinations.ai/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache'
-            },
-            body: JSON.stringify({
-                messages: [
-                    { 
-                        role: 'system', 
-                        content: `Você é uma IA especialista em ambiente aquático. Responda em português brasileiro. ${responseAIValue}. OBS: Ignore os números no final da mensagem, e suas respostas devem ser únicas, ou sehja, não responda come se você esperasse uma resposta do usuário ou sugestão do mesmo.` 
-                    },
-                    { 
-                        role: 'user', 
-                        content: uniquePrompt // Usar prompt único
-                    }
-                ],
-                model: "openai",
-                private: true
-            })
-        });
+const response = await fetch(`https://gen.pollinations.ai/text/${uniquePrompt}?model=gemini-fast&key=${apiKey}&system=${systemRole}`);
 
         if (!response.ok) {
             throw new Error(`Erro: ${response.status}`);
@@ -180,8 +171,22 @@ async function genereteResponse() {
     }
 }
 
+// Discart prompt
 function discartPrompt() {
     typeResponse.value = "none";
     typeTopic.value = "none";
     toggleCreaetePrompt();
+}
+
+// Modal control
+// open modal
+function openModal(IDmodal) {
+    const modal = document.getElementById(IDmodal);
+    modal.classList.add("open");
+}
+
+// close modal
+function closeModal(IDmodal) {
+    const modal = document.getElementById(IDmodal);
+    modal.classList.remove("open");
 }

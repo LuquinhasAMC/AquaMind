@@ -56,6 +56,9 @@ header {
     margin-bottom: 5px;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--boder-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 main {

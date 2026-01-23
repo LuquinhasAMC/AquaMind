@@ -22,7 +22,45 @@
     <!-- Header -->
     <header>
         <h1 style="font-size: 20px; user-select: none;">Aqua<span style="color: var(--primary-color); border-bottom: 2px solid var(--primary-color);">Mind</span></h1>
+        <button class="material-button-icon-transparent" onclick="openModal('about-modal')">
+            <?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="57.288px" height="122.88px" viewBox="0 0 57.288 122.88" enable-background="new 0 0 57.288 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M32.499,0c4.436,0,7.926,1.281,10.468,3.819c2.515,2.53,3.785,6.007,3.785,10.481 c0,4.538-2.163,8.572-6.521,12.11c-4.381,3.538-9.463,5.318-15.254,5.318c-4.352,0-7.812-1.218-10.465-3.66 c-2.651-2.47-3.976-5.665-3.976-9.639c0-5.007,2.163-9.322,6.465-12.987C21.301,1.816,26.465,0,32.499,0L32.499,0z M57.288,122.88 H0v-9.64h10.765V54.36H0v-7.674h26.775c6.763,0,13.418-0.812,19.992-2.47v69.024h10.521V122.88L57.288,122.88z"/></g></svg>
+        </button>
     </header>
+
+    <div id="about-modal" class="background-modal">
+        <div id="modal-content-container" class="modal-container">
+            <div class="modal-header">
+                <h1>Sobre</h1>
+                <button class="material-button-icon-transparent" onclick="closeModal('about-modal')">
+                    <?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.878px" height="122.88px" viewBox="0 0 122.878 122.88" enable-background="new 0 0 122.878 122.88" xml:space="preserve"><g><path d="M1.426,8.313c-1.901-1.901-1.901-4.984,0-6.886c1.901-1.902,4.984-1.902,6.886,0l53.127,53.127l53.127-53.127 c1.901-1.902,4.984-1.902,6.887,0c1.901,1.901,1.901,4.985,0,6.886L68.324,61.439l53.128,53.128c1.901,1.901,1.901,4.984,0,6.886 c-1.902,1.902-4.985,1.902-6.887,0L61.438,68.326L8.312,121.453c-1.901,1.902-4.984,1.902-6.886,0 c-1.901-1.901-1.901-4.984,0-6.886l53.127-53.128L1.426,8.313L1.426,8.313z"/></g></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Informações gerais</h4>
+                <ul style="color: var(--text-color);">
+                    <li>
+                        <p>Desenvolvido por: <a href="https://github.com/LuquinhasAMC">LuquinhasAMC</a></p>
+                    </li>
+                    <li>
+                        <p>Código fonte: <a href="https://github.com/LuquinhasAMC/AquaMind">GitHub</a></p>
+                    </li>
+                    <li>
+                        <p>License: MIT</p>
+                    </li>
+                    <li>
+                        <p>API: Pollinations.AI</p>
+                    </li>
+                    <li>
+                        <p>Modelo da IA: Gemini</p>
+                    </li>
+                </ul>
+                <h4>Descrição do projeto</h4>
+                <p style="color: var(--text-color); padding-top: 10px;">
+                    O AquaMind tem o objetivo de apresentar informações sobre o mundo aquático usando o poder da IA. Ele foi desenvolvido para um evento escolar.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- Main -->
     <main>
