@@ -1,0 +1,14 @@
+.material-select {
+    background-color: var(--primary-color-for-select);
+    color: var(--text-color);
+    border-radius: 15px;
+    border: 1px solid var(--boder-color);
+}
+
+.material-select:hover {
+    background-color: var(--primary-color-for-select-hover);
+}
+
+.material-select:focus {
+    outline-color: var(--primary-color);
+}

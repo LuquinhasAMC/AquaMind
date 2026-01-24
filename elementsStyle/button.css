@@ -1,0 +1,119 @@
+.material-glass {
+    background: rgba(226, 236, 255, 0.487);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid var(--boder-color);
+    box-shadow: 0 4px 6px var(shadow-color);
+}
+
+/* Main */
+.material-button-main {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    color: var(--secondary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+}
+
+.material-button-icon-main {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    color: var(--secondary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+    flex: none;
+}
+
+/* Outline */
+.material-button-main-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    padding: 10px;
+    color: var(--primary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+}
+
+
+/* Transparent */
+.material-button-icon-transparent {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    color: var(--primary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+    flex: none;
+}
+
+/* Link */
+.material-button-link {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    padding: 2px;
+    color: var(--primary-color);
+    text-align: center;
+    transition: all 0.1s ease;
+    text-decoration: none;
+}
+
+/* Icon Buttons svg */
+.material-button-icon-main svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    fill: var(--secondary-color);
+}
+
+.material-button-icon-transparent svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    fill: var(--primary-color);
+}
+
+/* Hover */
+.material-button-icon-transparent:hover, .material-button-main-outline:hover {
+    background-color: var(--no-background-color-hover);
+    cursor: pointer;
+}
+
+.material-button-main:hover, .material-button-icon-main:hover {
+    background-color: var(--primary-color-hover);
+    cursor: pointer;
+}
+
+.material-button-link:hover {
+    cursor: pointer;
+    background-color: var(--primary-color-without-background-hover);
+    text-decoration: underline;
+}
+
+/* Ativo */
+.material-button-icon-transparent:active, .material-button-main-outline:active {
+    background-color: var(--no-background-color-active);
+}
+
+.material-button-main:active, .material-button-icon-main:active {
+    background-color: var(--primary-color-active);
+}
+
+.material-button-link:active {
+    cursor: pointer;
+    background-color: var(--primary-color-without-background-active);
+}
+
+/* Desabilitado */
+.material-button-main:disabled, .material-button-icon-main:disabled, .material-button-icon-transparent:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+}
