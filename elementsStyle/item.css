@@ -1,0 +1,23 @@
+.material-item {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.material-item.column {
+    flex-direction: column;
+}
+
+.item-info-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+.item-action-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

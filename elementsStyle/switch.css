@@ -1,0 +1,55 @@
+.material-switch {
+    appearance: none;
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    width: 40px;
+    height: 10px;
+    background-color: var(--disabled-color);
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.material-switch:checked {
+    background-color: var(--primary-color);
+}
+
+.material-switch::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--disabled-color);
+    transition: all 0.3s ease;
+}
+
+.material-switch:checked::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.material-switch:checked:hover::after {
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.material-switch:hover::after {
+    box-shadow: 0 0 5px var(--disabled-color);
+}
+

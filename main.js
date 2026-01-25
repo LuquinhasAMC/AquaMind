@@ -21,7 +21,63 @@ const alertMenssage = document.getElementById("alert-menssage");
 const bottmButtons = document.querySelectorAll(".bottom-buttons");
 
 // API key
-const apiKey = "pk_Y5I6mOOebQCCoqHH";
+const apiDefault = "https://api.npoint.io/2422e2e983914d09e6aa";
+
+// Configurações
+let config = {
+    usePersonalAPI: false,
+    personalAPI: "",
+    apiDefault: "",
+    useLargeFont: false
+}
+
+const personalInputAPI = document.getElementById("api-input");
+const switchUsePersonalAPI = document.getElementById("use-personal-api");
+const switchUseLargeFont = document.getElementById("use-large-font");
+
+function saveConfig() {
+    localStorage.setItem("config", JSON.stringify(config));
+}
+
+async function loadConfig() {
+    const savedConfig = localStorage.getItem("config");
+    if (savedConfig) {
+        const parsed = JSON.parse(savedConfig);
+        config = { ...config, ...parsed };
+    } else {
+        localStorage.setItem("config", JSON.stringify(config));
+    }
+    personalInputAPI.value = config.personalAPI;
+    switchUsePersonalAPI.checked = config.usePersonalAPI;
+    switchUseLargeFont.checked = config.useLargeFont;
+    altereFontSize();
+}
+
+loadConfig();
+
+function saveAPIKey() {
+    config.personalAPI = personalInputAPI.value;
+    saveConfig();
+}
+
+function toggleUsePersonalAPI() {
+    config.usePersonalAPI = switchUsePersonalAPI.checked;
+    saveConfig();
+}
+
+function altereFontSize() {
+    if (config.useLargeFont) {
+        viewContentResponse.style.fontSize = "1.5vw";
+    } else {
+        viewContentResponse.style.fontSize = "1vw";
+    }
+}
+
+function toggleLargeFont() {
+    config.useLargeFont = switchUseLargeFont.checked;
+    altereFontSize();
+    saveConfig();
+}
 
 // Show alert
 function showAlert(message) {
@@ -47,7 +103,7 @@ function toggleCreaetePrompt() {
             createPromptContainer.style.display = "none";
         }, 500);
         buttonOpenCreatePrompt.textContent = "Criar um novo prompt";
-    } else { 
+    } else {
         createPromptContainer.style.display = "flex";
         setTimeout(() => {
             createPromptContainer.style.maxHeight = "500px";
@@ -141,16 +197,31 @@ async function genereteResponse() {
     if (getComputedStyle(createPromptContainer).display === "flex") {
         toggleCreaetePrompt();
     }
-    
+
     loadingResponseShow();
 
     try {
         // Adicionar timestamp único para evitar cache
         const timestamp = Date.now();
-        const uniquePrompt = `${questionValue} ${topicValue} ${timestamp}`;
-        const systemRole = 'Você é uma IA especialista em ambiente aquático. Responda em português brasileiro. ${responseAIValue}. OBS: Ignore os números no final da mensagem, e suas respostas devem ser únicas, ou sehja, não responda come se você esperasse uma resposta do usuário ou sugestão do mesmo.'
+        const uniquePrompt = `${questionValue} ${topicValue} ${responseAIValue} ${timestamp}`;
+        const systemRole = `Você é uma IA especialista em ambiente aquático. Responda em português brasileiro. ${responseAIValue}. OBS: Ignore os números no final da mensagem, e suas respostas devem ser únicas, ou seja, não responda como se você esperasse uma resposta do usuário ou sugestão do mesmo.`
 
-const response = await fetch(`https://gen.pollinations.ai/text/${uniquePrompt}?model=gemini-fast&key=${apiKey}&system=${systemRole}`);
+        const needsAPIDefault = !config.apiDefault || config.apiDefault === "";
+        if (needsAPIDefault) {
+            const loadAPIDefault = async () => {
+                const response = await fetch(apiDefault);
+                const data = await response.json();
+                console.log(data);
+                return data;
+            }
+            const data = await loadAPIDefault();
+            config.apiDefault = data.api;
+            saveConfig();
+        }
+        const apiKey = config.usePersonalAPI && config.personalAPI !== "" ? config.personalAPI : config.apiDefault;
+        console.log(apiKey)
+
+        const response = await fetch(`https://gen.pollinations.ai/text/${uniquePrompt}?model=gemini-fast&key=${apiKey}&system=${systemRole}&feed=false`);
 
         if (!response.ok) {
             throw new Error(`Erro: ${response.status}`);
@@ -162,7 +233,7 @@ const response = await fetch(`https://gen.pollinations.ai/text/${uniquePrompt}?m
 
         showAlert("Resposta gerada com sucesso!");
         loadingResponseHide();
-        
+
     } catch (error) {
         console.error("Erro:", error);
         showAlert("Erro ao gerar a resposta: " + error.message);

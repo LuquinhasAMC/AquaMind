@@ -1,0 +1,16 @@
+.material-textbox {
+    padding: 5px;
+    color: var(--text-color);
+    border-radius: 5px;
+    border: 1px solid var(--boder-color);
+    background-color: transparent;
+}
+
+.material-textbox.full-w{
+    width: 100%;
+}
+
+.material-textbox:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
