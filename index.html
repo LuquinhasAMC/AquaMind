@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="elementsStyle/button.css">
     <link rel="stylesheet" href="elementsStyle/modal.css">
     <link rel="stylesheet" href="elementsStyle/select.css">
-    <link rel="stylesheet" href="elementsStyle/titles.css">
+    <link rel="stylesheet" href="elementsStyle/text.css">
     <link rel="stylesheet" href="elementsStyle/switch.css">
     <link rel="stylesheet" href="elementsStyle/item.css">
     <link rel="stylesheet" href="elementsStyle/textbox.css">
@@ -52,7 +52,7 @@
                 <div class="material-item">
                     <div class="item-info-container">
                         <h4>Usar API personalizada</h4>
-                        <p>Se ativado, irá usar a API personalizada, caso não tenha uma API, pegue a sua aqui: <a href="https://enter.pollinations.ai" class="material-button-link">Pollinations.ai</a>. OBS: Isso só irá funcionar se houver uma API inserida no campo abaixo, caso contrário, o site irá usar a API padrão.</p>
+                        <p class="material-text-description">Se ativado, irá usar a API personalizada, caso não tenha uma API, pegue a sua aqui: <a href="https://enter.pollinations.ai" class="material-button-link">Pollinations.ai</a>. OBS: Isso só irá funcionar se houver uma API inserida no campo abaixo, caso contrário, o site irá usar a API padrão.</p>
                     </div>
                     <div class="item-action-container">
                         <input type="checkbox" id="use-personal-api" class="material-switch" onclick="toggleUsePersonalAPI()">
@@ -62,7 +62,7 @@
                 <div class="material-item column">
                     <div class="item-info-container">
                         <h4>API personalizada</h4>
-                        <p>Insira a sua API personalizada no campo abaixo.</p>
+                        <p class="material-text-description">Insira a sua API personalizada no campo abaixo.</p>
                     </div>
                     <div class="item-action-container">
                         <input type="password" placeholder="Sua API" id="api-input" class="material-textbox full-w" oninput="saveAPIKey()">
@@ -74,7 +74,7 @@
                 <div class="material-item">
                     <div class="item-info-container">
                         <h4>Usar fonte grande no texto da resposta</h4>
-                        <p>Se ativado, a escala da fonte do texto da resposta da IA ficará maior.</p>
+                        <p class="material-text-description">Se ativado, a escala da fonte do texto da resposta da IA ficará maior.</p>
                     </div>
                     <div class="item-action-container">
                         <input type="checkbox" id="use-large-font" class="material-switch" onclick="toggleLargeFont()">

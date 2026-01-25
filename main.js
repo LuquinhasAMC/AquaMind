@@ -67,9 +67,9 @@ function toggleUsePersonalAPI() {
 
 function altereFontSize() {
     if (config.useLargeFont) {
-        viewContentResponse.style.fontSize = "1.5vw";
+        viewContentResponse.style.fontSize = "1.5em";
     } else {
-        viewContentResponse.style.fontSize = "1vw";
+        viewContentResponse.style.fontSize = "1em";
     }
 }
 
