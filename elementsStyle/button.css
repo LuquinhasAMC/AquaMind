@@ -11,7 +11,7 @@
 .material-button-main {
     background-color: var(--primary-color);
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 10px;
     color: var(--secondary-color);
     text-align: center;
@@ -21,19 +21,23 @@
 .material-button-icon-main {
     background-color: var(--primary-color);
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     padding: 10px;
     color: var(--secondary-color);
     text-align: center;
     transition: all 0.1s ease;
     flex: none;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Outline */
 .material-button-main-outline {
     background-color: transparent;
     border: 2px solid var(--primary-color);
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 10px;
     color: var(--primary-color);
     text-align: center;
@@ -45,12 +49,16 @@
 .material-button-icon-transparent {
     background-color: transparent;
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     padding: 10px;
     color: var(--primary-color);
     text-align: center;
     transition: all 0.1s ease;
     flex: none;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Link */
@@ -78,6 +86,42 @@
     height: 20px;
     vertical-align: middle;
     fill: var(--primary-color);
+}
+
+/* Sizes */
+/* Small */
+.material-button-icon-main.small, .material-button-main-outline.small, .material-button-icon-transparent.small {
+    padding: 5px;
+}
+
+.material-button-icon-main.small, .material-button-main-outline.small, .material-button-icon-transparent.small {
+    width: 25px;
+    height: 25px;
+    padding: 7px;
+    border-radius: 5px;
+
+}
+
+/* Medium */
+.material-button-icon-main.medium, .material-button-main-outline.medium, .material-button-icon-transparent.medium {
+    padding: 10px;
+}
+
+.material-button-icon-main.medium, .material-button-main-outline.medium, .material-button-icon-transparent.medium {
+    width: 30px;
+    height: 30px;
+    padding: 7px;
+}
+
+/* Large */
+.material-button-icon-main.large, .material-button-main-outline.large, .material-button-icon-transparent.large {
+    padding: 12px;
+}
+
+.material-button-icon-main.large, .material-button-main-outline.large, .material-button-icon-transparent.large {
+    width: 40px;
+    height: 40px;
+    padding: 7px;
 }
 
 /* Hover */

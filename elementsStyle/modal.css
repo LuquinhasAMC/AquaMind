@@ -37,6 +37,7 @@
 .modal-container .modal-header {
     width: 100%;
     display: flex;
+    padding-bottom: 5px;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--boder-color);
