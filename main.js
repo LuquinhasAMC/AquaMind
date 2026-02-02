@@ -219,7 +219,6 @@ async function genereteResponse() {
             saveConfig();
         }
         const apiKey = config.usePersonalAPI && config.personalAPI !== "" ? config.personalAPI : config.apiDefault;
-        console.log(apiKey)
 
         const response = await fetch(`https://gen.pollinations.ai/text/${uniquePrompt}?model=gemini-fast&key=${apiKey}&system=${systemRole}&feed=false`);
 
