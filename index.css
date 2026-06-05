@@ -45,7 +45,8 @@ hr {
     margin: 10px 0;
 }
 
-#alert-container {
+/* Alert class */
+.alert-container {
     position: fixed;
     top: 20px;
     left: 50%;
@@ -57,7 +58,11 @@ hr {
     display: none;
     z-index: 1000;
     max-width: 600px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.alert-container-active {
+    display: flex;
+    animation: fade-in 0.3s ease-in;
 }
 
 header {
@@ -203,7 +208,7 @@ main {
         width: 90%;
     }
 
-    #alert-container {
+    .alert-container {
         max-width: 90%;
     }
 }
@@ -211,4 +216,15 @@ main {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%) translateX(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
 }

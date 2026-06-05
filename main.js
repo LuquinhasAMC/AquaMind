@@ -13,10 +13,6 @@ const loadingResponseContainer = document.getElementById("loading-response-conta
 const noResponseAIViewContainer = document.getElementById("no-response-ai-view-container");
 const viewContentResponse = document.getElementById("view-content-response");
 
-// Alert
-const alertContainer = document.getElementById("alert-container");
-const alertMenssage = document.getElementById("alert-menssage");
-
 // Bottom buttons
 const bottmButtons = document.querySelectorAll(".bottom-buttons");
 
@@ -30,6 +26,7 @@ let config = {
     apiDefault: "",
     useLargeFont: false
 }
+
 
 const personalInputAPI = document.getElementById("api-input");
 const switchUsePersonalAPI = document.getElementById("use-personal-api");
@@ -80,19 +77,38 @@ function toggleLargeFont() {
 }
 
 // Show alert
-function showAlert(message) {
-    alertMenssage.textContent = message;
-    alertContainer.style.display = "block";
-    setTimeout(() => {
-        alertContainer.style.opacity = "1";
-    }, 300);
+class Alert {
+    constructor(text, duration = 3000) {
+        this._text = text;
+        this._duration = duration;
+    }
 
-    setTimeout(() => {
-        alertContainer.style.opacity = "0";
+    showAlert() {
+        const atualElementId = `alert-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+        const alertElement = `
+        <div class="alert-container material-glass" id="${atualElementId}">
+            <span>${this._text}</span>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', alertElement);
+        const elementControl = document.getElementById(atualElementId);
+
         setTimeout(() => {
-            alertContainer.style.display = "none";
-        }, 500);
-    }, 3000);
+            if (elementControl) {
+                elementControl.classList.add("alert-container-active")
+            }
+        }, 10)
+
+        setTimeout(() => {
+            if (elementControl) {
+                elementControl.style.opacity = '0'
+            }
+            setTimeout(() => {
+                if (elementControl) {
+                    elementControl.remove()
+                }
+            }, 500)
+        }, this._duration)
+    }
 }
 
 // Toggle create prompt
@@ -102,7 +118,7 @@ function toggleCreaetePrompt() {
         setTimeout(() => {
             createPromptContainer.style.display = "none";
         }, 500);
-        buttonOpenCreatePrompt.textContent = "Criar um novo prompt";
+        buttonOpenCreatePrompt.textContent = "Criar novo prompt";
     } else {
         createPromptContainer.style.display = "flex";
         setTimeout(() => {
@@ -114,8 +130,9 @@ function toggleCreaetePrompt() {
 
 // Clear response
 function clearResponse() {
+    const alertError = new Alert("Não há resposta para limpar.")
     if (getComputedStyle(noResponseAIViewContainer).display === "flex") {
-        showAlert("Não há resposta para limpar.");
+        alertError.showAlert();
         return;
     }
     viewContentResponse.innerHTML = "";
@@ -126,29 +143,34 @@ function clearResponse() {
 
 // Copy response
 function copyResponse() {
+    const alertError = new Alert("Não há resposta para copiar.")
+    const alertConfirm = new Alert("Resposta copiada para a área de transferência!")
     if (getComputedStyle(noResponseAIViewContainer).display === "flex") {
-        showAlert("Não há resposta para copiar.");
+        alertError.showAlert();
         return;
     }
     const textToCopy = viewContentResponse.innerText;
     navigator.clipboard.writeText(textToCopy).then(() => {
-        showAlert("Resposta copiada para a área de transferência!");
+        alertConfirm.showAlert();
     }).catch(err => {
-        showAlert("Erro ao copiar a resposta: " + err);
+        const alertErrorCopy = new Alert("Erro ao copiar a resposta: " + err)
+        alertErrorCopy.showAlert()
     });
 }
 
 // Audio response
 function audioResponse() {
+    const alertError = new Alert("Não há resposta para ouvir.")
+    const alertConfirm = new Alert("Lendo a resposta em voz alta...")
     if (getComputedStyle(noResponseAIViewContainer).display === "flex") {
-        showAlert("Não há resposta para ouvir.");
+        alertError.showAlert();
         return;
     }
     const textToSpeak = viewContentResponse.innerText;
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = 'pt-BR';
     speechSynthesis.speak(utterance);
-    showAlert("Lendo a resposta em voz alta...");
+    alertConfirm.showAlert()
 }
 
 // Loading response show
@@ -188,9 +210,10 @@ async function genereteResponse() {
     const questionValue = typeResponse.value;
     const topicValue = typeTopic.value;
     const responseAIValue = typeResponseAI.value;
+    const alertError = new Alert("É preciso configurar o prompt para gerar uma resposta.")
 
     if (questionValue === "none" || topicValue === "none") {
-        showAlert("É preciso configurar o prompt para gerar uma resposta.");
+        alertError.showAlert();
         return;
     }
 
@@ -220,7 +243,7 @@ async function genereteResponse() {
         }
         const apiKey = config.usePersonalAPI && config.personalAPI !== "" ? config.personalAPI : config.apiDefault;
 
-        const response = await fetch(`https://gen.pollinations.ai/text/${uniquePrompt}?model=gemini-fast&key=${apiKey}&system=${systemRole}&feed=false`);
+        const response = await fetch(`https://gen.pollinations.ai/text/${uniquePrompt}?model=gemma&key=${apiKey}&system=${systemRole}&feed=false`);
 
         if (!response.ok) {
             throw new Error(`Erro: ${response.status}`);
@@ -228,14 +251,16 @@ async function genereteResponse() {
 
         const dataResponse = await response.text();
         const htmlContent = marked.parse(dataResponse);
+        const alertConfirmResponse = new Alert("Resposta gerada com sucesso!")
         viewContentResponse.innerHTML = htmlContent;
 
-        showAlert("Resposta gerada com sucesso!");
+        alertConfirmResponse.showAlert();
         loadingResponseHide();
 
     } catch (error) {
+        const alertErrorResponse = new Alert("Erro ao gerar a resposta: " + error.message)
         console.error("Erro:", error);
-        showAlert("Erro ao gerar a resposta: " + error.message);
+        alertErrorResponse.showAlert()
         viewContentResponse.innerHTML = "";
         loadingResponseHide();
     }
