@@ -1,14 +1,88 @@
 .material-select {
-    background-color: var(--primary-color-for-select);
+    position: relative;
+    appearance: base-select;
+    --border-color-select: color-mix(in srgb, var(--primary-color), black 75%);
+    background-color: color-mix(in srgb, var(--secondary-color), transparent 60%);
+    box-shadow: 0px 1px 2px var(--shadow-color);
     color: var(--text-color);
+    border-radius: 5px;
+    border: 1px solid color-mix(in srgb, var(--border-color-select), transparent 80%);
+    outline: none;
+    transition: all 0.2s;
+    flex: none;
+    padding: 5px;
+}
+
+.material-select::picker(select) {
+    appearance: base-select;
+    border: 1px solid color-mix(in srgb, var(--border-color-select), transparent 90%);
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 5px 5px 10px var(--shadow-color);
+    background-color: color-mix(in srgb, var(--secondary-color), transparent 30%);
+    backdrop-filter: blur(15px);
+    top: anchor(bottom);
+    bottom: auto;
+    margin: 5px 0;
+    position-try-order: most-space;
+}
+.material-select::picker(select)::-webkit-scrollbar {
+    display: none;
+}
+
+.material-select option {
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 16px;
+    margin: 3px 0px;
+}
+
+.material-select optgroup {
+    color: color-mix(in srgb, var(--text-color), transparent 60%);
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.material-select button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.container-select-opitions {
+    padding: 5px;
     border-radius: 10px;
-    border: 1px solid var(--boder-color);
 }
 
+/* Esados */
 .material-select:hover {
-    background-color: var(--primary-color-for-select-hover);
+    background-color: color-mix(in srgb, var(--secondary-color), transparent 40%);
 }
 
-.material-select:focus {
-    outline-color: var(--primary-color);
+.material-select:open {
+    border-color: var(--border-color-select);
+    background-color: color-mix(in srgb, var(--secondary-color), transparent 40%);
+}
+
+.material-select option:checked {
+    background-color: var(--primary-color);
+    color: var(--secondary-color)
+}
+.material-select option:checked:hover {
+    background-color: color-mix(in srgb, var(--primary-color), white 15%);
+    color: var(--secondary-color);
+}
+.material-select option:hover {
+    background-color: color-mix(in srgb, var(--primary-color), transparent 85%);
+    color: var(--primary-color)
+}
+
+.material-select:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
 }

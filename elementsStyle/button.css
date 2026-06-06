@@ -16,6 +16,10 @@
     color: var(--secondary-color);
     text-align: center;
     transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .material-button-icon-main {
@@ -42,6 +46,10 @@
     color: var(--primary-color);
     text-align: center;
     transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 
@@ -88,13 +96,21 @@
     fill: var(--primary-color);
 }
 
+/* Button icons */
+.material-button-main svg, .material-button-main-outline svg, .material-button-transparent svg {
+    fill: currentColor;
+    width: 15px;
+    height: 15px;
+}
+
+
 /* Sizes */
 /* Small */
-.material-button-icon-main.small, .material-button-main-outline.small, .material-button-icon-transparent.small {
+.material-button-main.small, .material-button-main-outline.small, .material-button-transparent.small {
     padding: 5px;
 }
 
-.material-button-icon-main.small, .material-button-main-outline.small, .material-button-icon-transparent.small {
+.material-button-icon-main.small, .material-button-icon-outline.small, .material-button-icon-transparent.small {
     width: 25px;
     height: 25px;
     padding: 7px;
@@ -103,22 +119,22 @@
 }
 
 /* Medium */
-.material-button-icon-main.medium, .material-button-main-outline.medium, .material-button-icon-transparent.medium {
+.material-button-main.medium, .material-button-main-outline.medium, .material-button-transparent.medium {
     padding: 10px;
 }
 
-.material-button-icon-main.medium, .material-button-main-outline.medium, .material-button-icon-transparent.medium {
+.material-button-icon-main.medium, .material-button-icon-outline.medium, .material-button-icon-transparent.medium {
     width: 30px;
     height: 30px;
     padding: 7px;
 }
 
 /* Large */
-.material-button-icon-main.large, .material-button-main-outline.large, .material-button-icon-transparent.large {
+.material-button-main.large, .material-button-main-outline.large, .material-button-transparent.large {
     padding: 12px;
 }
 
-.material-button-icon-main.large, .material-button-main-outline.large, .material-button-icon-transparent.large {
+.material-button-icon-main.large, .material-button-icon-outline.large, .material-button-icon-transparent.large {
     width: 40px;
     height: 40px;
     padding: 7px;
@@ -126,33 +142,33 @@
 
 /* Hover */
 .material-button-icon-transparent:hover, .material-button-main-outline:hover {
-    background-color: var(--no-background-color-hover);
+    background-color: color-mix(in srgb, var(--primary-color), transparent 85%);
     cursor: pointer;
 }
 
 .material-button-main:hover, .material-button-icon-main:hover {
-    background-color: var(--primary-color-hover);
+    background-color: color-mix(in srgb, var(--primary-color), white 15%);
     cursor: pointer;
 }
 
 .material-button-link:hover {
     cursor: pointer;
-    background-color: var(--primary-color-without-background-hover);
+    background-color: color-mix(in srgb, var(--primary-color), transparent 85%);
     text-decoration: underline;
 }
 
 /* Ativo */
 .material-button-icon-transparent:active, .material-button-main-outline:active {
-    background-color: var(--no-background-color-active);
+    background-color: color-mix(in srgb, var(--primary-color), transparent 75%);
 }
 
 .material-button-main:active, .material-button-icon-main:active {
-    background-color: var(--primary-color-active);
+    background-color: color-mix(in srgb, var(--primary-color), black 10%);
 }
 
 .material-button-link:active {
     cursor: pointer;
-    background-color: var(--primary-color-without-background-active);
+    background-color: color-mix(in srgb, var(--primary-color), transparent 75%);
 }
 
 /* Desabilitado */

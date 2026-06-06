@@ -1,14 +1,7 @@
 :root {
     --primary-color: #537afb;
-    --primary-color-hover: #7192fd;
-    --primary-color-active: #3a5fe0;
     --primary-color-for-select-hover: #537afb36;
     --primary-color-for-select: #537afb6b;
-    --primary-color-without-background-hover: #537afb2a;
-    --primary-color-without-background-active: #537afb1d;
-
-    --no-background-color-hover: #6b748a36;
-    --no-background-color-active: #6b748a16;
 
     --secondary-color: #ffffff;
     --disabled-color: #6b748a;
